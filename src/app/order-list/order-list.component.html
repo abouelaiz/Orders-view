@@ -1,0 +1,45 @@
+<div class="orders-list">
+  <div class="header" [swal]="chooseDeliver">
+    Commande en cours
+  </div>
+  <div class="item" *ngFor="let order of orders" ngClass="{{order?.restaurant?.platform}}" [swal]="chooseDeliver" (click)="selectedOrder = order">
+    <div class="row" [ngClass]="{ 'selected': selectedOrder.displayId === order.displayId }">
+      <div class="text">
+        {{order.name}} <br/>#{{order.displayId}}<br/><br/>
+        {{order.address.address}}
+      </div>
+      <div>
+        {{order.deliver || '-'}} <br/> 2/3  <br/><br/>
+        {{(order.total - order.discount)/100}} €<br/> {{order.orderedAt | date: 'HH:mm'}}
+      </div>
+    </div>
+  </div>
+
+  <swal #chooseDeliver title="Choix livreur !" (confirm)="confirm()" (cancel)="deketeOrder()">
+
+    <!-- This targets the confirm button's inner content
+         Notice the usage of ng-container to avoid creating an useless DOM element inside the button -->
+
+    <div *swalPortal class="lists">
+      <button class="item" *ngFor="let coursier of coursiers" [ngClass]="{ 'selected': selectedOrder.deliver === coursier.name }"
+      (click)="choose(coursier.name)">
+        {{coursier.name}}
+      </button>
+
+    </div>
+
+    <ng-container *swalPortal="swalTargets.cancelButton">
+      Annuler la commande
+    </ng-container>
+
+    <ng-container *swalPortal="swalTargets.confirmButton">
+      Commande livré
+    </ng-container>
+
+    <ng-container *swalPortal="swalTargets.confirmButton">
+      Commande caché
+    </ng-container>
+
+  </swal>
+</div>
+<div #map class="map"></div>

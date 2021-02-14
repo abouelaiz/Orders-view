@@ -6,6 +6,31 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfMz1RJ55y_yBh8yziwDIRmYX6KJordL8"
+          type="text/javascript"></script>
+  <script>
+    var firebaseConfig = {
+      apiKey: "AIzaSyC4gv6FpgY55_0E8eJW-mclz8z8D4IIHuc",
+      authDomain: "delivery-d627f.firebaseapp.com",
+      databaseURL: "https://delivery-d627f.firebaseio.com",
+      projectId: "delivery-d627f",
+      storageBucket: "delivery-d627f.appspot.com",
+      messagingSenderId: "435138377469",
+      appId: "1:435138377469:web:49277f8ba90259d02db094",
+      measurementId: "G-F2ZF1P2Z6R"
+    };
+    // Initialize Firebase
+    var app = firebase.initializeApp(firebaseConfig);
+
+    function funct(order) {
+      console.log('userId', order);
+      /*
+      firebase.database().ref('users/' + 'userId').set({
+        username: 'name'
+      });*/
+    }
+  </script>
 </head>
 <body>
   <app-root></app-root>

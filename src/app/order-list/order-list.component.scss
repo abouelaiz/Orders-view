@@ -1,0 +1,85 @@
+.orders-list {
+  height: 100vh;
+  width: 30%;
+  right: 0;
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  .header {
+    padding: 6px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    border: 3px solid;
+    width: calc(100%-7px);
+    margin-left: 7px;
+  }
+  .item {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 3px solid;
+    width: calc(100%-7px);
+    margin-left: 7px;
+    &.J {
+      background-color: #E48952;
+      color: white;
+    }
+    &.U {
+      background-color: #3FC060;
+      color: white;
+    }
+    &.D {
+      background-color: #00CDBC;
+      color: white;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px;
+      &.selected {
+        border: 5px solid black;
+      }
+    }
+    .text {
+      text-align: left;
+      max-width: 70%;
+    }
+  }
+}
+.lists {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0px;
+  .item {
+    cursor: pointer;
+    padding: 10px;
+    color: black;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 18px;
+    margin: 5px;
+    &.selected {
+      background: black;
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+.map {
+  width: 70vw;
+  height: 900px;
+  position: absolute;
+  overflow: hidden;
+  top: 0;
+}
+
+.swal2-actions {
+  justify-content: space-between !important;
+  background-color: red;
+}
+
+.swal2-cancel {
+  background-color: red;
+}
