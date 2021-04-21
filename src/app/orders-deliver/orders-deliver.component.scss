@@ -1,0 +1,206 @@
+  .nav {
+    display: flex;
+    .tab {
+      width: 50%;
+      padding: 10px;
+      border: 1px solid;
+      text-align: center;
+      font-size: 1.5em;
+      background-color: #fafafa;
+      color: black;
+      &.selected {
+        font-weight: bold;
+        background-color: black;
+        color: white;
+        border: 1px solid black;
+      }
+    }
+  }
+
+
+.orders-deliver-list {
+  img {
+    height: 30px;
+    width: 130px;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 5px;
+  }
+  .item {
+    background: #d8d8d8;
+    border-bottom: 2px solid black;
+    min-width: 45px;
+    .text {
+      max-width: 75%;
+    }
+    .text-left {
+      text-align: center;
+    }
+  }
+
+  .status {
+    font-weight: bold;
+    &.P {
+      color: #ff9900;
+    }
+    &.U {
+      color: red;
+    }
+    &.R{
+      color: #336600;
+    }
+    &.I {
+      color: #000000;
+    }
+  }
+
+  .tag {
+    background-color: black;
+    border-radius: 50%;
+    padding: 2px 6px;
+    margin: 5px;
+    border: 2px solid;
+    color: white;
+  }
+}
+
+  .swal-lists {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 0px;
+    flex-wrap: wrap;
+    .item {
+      cursor: pointer;
+      padding: 10px;
+      color: black;
+      border-radius: 10px;
+      border: 2px solid black;
+      font-size: 1.2em;
+      font-weight: bold;
+      margin: 5px;
+      text-transform: uppercase;
+      min-width: 45px;
+      &.selected {
+        background: black;
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .lists {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 0px;
+    flex-wrap: wrap;
+    .item {
+      cursor: pointer;
+      padding: 10px;
+      color: black;
+      border-radius: 10px;
+      border: 2px solid black;
+      font-size: 18px;
+      margin: 5px;
+      text-transform: uppercase;
+      min-width: 120px;
+      &.selected {
+        background: black;
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
+
+.orders-list {
+  height: 100vh;
+  width: 30%;
+  right: 0;
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  .header {
+    padding: 6px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    border: 3px solid;
+    width: calc(100%-7px);
+    margin-left: 7px;
+  }
+  .item {
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 3px solid;
+    width: calc(100%-7px);
+    margin-left: 7px;
+    &.J {
+      background-color: #E48952;
+      color: white;
+    }
+    &.U {
+      background-color: #3FC060;
+      color: white;
+    }
+    &.D {
+      background-color: #00CDBC;
+      color: white;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px;
+      &.selected {
+        border: 5px solid black;
+      }
+    }
+    .text {
+      text-align: left;
+      max-width: 70%;
+    }
+  }
+}
+
+
+
+.map {
+  width: 100vw;
+  height: 900px;
+  position: absolute;
+  overflow: hidden;
+  top: 30;
+}
+
+.swal2-actions {
+  justify-content: space-between !important;
+  background-color: red;
+}
+
+.swal2-cancel {
+  background-color: red;
+}
+
+.bar-bottom {
+  background: red;
+}
+
+
+.error {
+  background: #cc0000;
+  color: white !important;
+}
+
+.valid {
+  background: #336600;
+  color: white !important;
+}
+
+.warning {
+  background: #ff9900;
+  color: white !important;
+}
+

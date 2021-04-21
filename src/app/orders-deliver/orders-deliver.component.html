@@ -1,0 +1,121 @@
+<div  class="nav">
+  <div class="tab" [ngClass]="{ 'selected': mode === 'list' }" (click)="mode = 'list'">
+    Listes
+  </div>
+  <div class="tab" [ngClass]="{ 'selected': mode === 'map' }" (click)="setMap()">
+    Map
+  </div>
+</div>
+<div class="orders-deliver-list" *ngIf="mode == 'list'">
+  <div class="item" *ngFor="let order of deliverOrders | orderBy : ['order']" ngClass="{{order?.restaurant?.platform}}" [swal]="chooseDeliver" (click)="select(order)">
+    <div class="row" [ngClass]="{ 'selected': selectedOrder?.displayId === order.displayId }">
+      <div class="text">{{order.name}} <br/>#{{order.displayId}} <img src="{{'../../assets/' + order.restaurant.platform + '.png'}}"/><br/>
+        <span class="status" ngClass="{{order.status}}">{{status[order.status]}}</span><br/>
+        <span>{{order.address.address}}</span>
+      </div>
+      <div class="text-left">
+        {{(order.total - order.discount)/100}} €<br/>
+        <ng-material-icon *ngIf="order.paymentMethod !== 'card'" icon="payments" size="1.2" color="red"></ng-material-icon>
+        <ng-material-icon *ngIf="order.paymentMethod !== 'card'" icon="paid" size="1.2" color="red"></ng-material-icon>
+        <ng-material-icon *ngIf="order.paymentMethod === 'card'" icon="payment" size="1.2"></ng-material-icon>
+
+        <br/><span class="tag">{{order.order || '-'}}</span><br/>
+      <span style="padding: 5px">
+        {{order.orderedAt | date: 'HH:mm'}} <br/> <ng-material-icon icon="schedule" size="1.2"></ng-material-icon>
+      </span>
+
+      </div>
+    </div>
+  </div>-
+</div>
+<div #map class="map" *ngIf="mode == 'map'">
+</div>
+
+<swal #login title="" (confirm)="confirmLogin()">
+
+  <!-- This targets the confirm button's inner content
+       Notice the usage of ng-container to avoid creating an useless DOM element inside the button -->
+  <ng-container *swalPortal>
+    <h3>Salam alykome 😀</h3>
+    <h3>c'est qui ?</h3>
+    <div  class="lists">
+      <button class="item" *ngFor="let coursier of coursiers" [ngClass]="{ 'selected': deliver === coursier.name }"
+              (click)="choose(coursier.name)">
+        {{coursier.name}}
+      </button>
+    </div>
+  </ng-container>
+  <ng-container *swalPortal="swalTargets.confirmButton">
+    Fermer
+  </ng-container>
+
+</swal>
+<swal #chooseDeliver title="">
+  <!-- This targets the confirm button's inner content
+       Notice the usage of ng-container to avoid creating an useless DOM element inside the button -->
+  <ng-container *swalPortal>
+    <ng-container *ngIf="selectedOrder.status === 'P'">
+      <h3>Appeler client !</h3>
+      <button class="item">
+        <a href="{{'tel:' + selectedOrder?.phone}}" style="font-size: 1.5em">
+          <ng-material-icon icon="perm_phone_msg" size="1.5"></ng-material-icon>
+          {{ selectedOrder?.phone }}
+          <br/>
+        </a>
+      </button>
+      <h2>{{selectedOrder.phoneCode}}</h2>
+      <div  class="swal-lists actions">
+        <button class="item error" (click)="updateStatus('C')">
+          Annulé
+        </button>
+        <button class="item valid" (click)="updateStatus('R')">
+          confirmé
+        </button>
+        <button class="item warning" (click)="updateStatus('U')">
+          Indisponible
+        </button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="selectedOrder.status !== 'P'">
+      <h3>Actions !</h3>
+      <div  class="swal-lists">
+        <button class="item">
+          <a href="{{'tel:' + selectedOrder?.phone}}">
+            <ng-material-icon icon="perm_phone_msg" size="1.5"></ng-material-icon>
+            <br/>{{selectedOrder?.phoneCode}}
+          </a>
+        </button>
+        <button class="item">
+          <a href="{{'http://maps.google.com/?q=' + selectedOrder?.address.address}}">
+            <ng-material-icon icon="near_me" size="1.5"></ng-material-icon>
+          </a>
+        </button>
+        <div>
+          {{selectedOrder?.instructions}}
+        </div>
+      </div>
+      <h3 *ngIf="deliverOrders.length > 1">Ordres commande !</h3>
+      <div  class="swal-lists" *ngIf="deliverOrders.length > 1">
+        <button class="item" *ngFor="let order of deliverOrders; let i = index" (click)="setOrder(i)"  [ngClass]="{ 'selected': selectedOrder?.order === (i+1) }">
+          {{i+1}}
+        </button>
+      </div>
+      <h3>Status Commande</h3>
+      <div  class="swal-lists actions">
+        <button class="item error" (click)="updateStatus('C')">
+          Annulé
+        </button>
+        <button class="item valid" (click)="updateStatus('D')">
+          Livré
+        </button>
+        <button class="item warning" (click)="updateStatus('U')">
+          Indisponible
+        </button>
+      </div>
+    </ng-container>
+  </ng-container>
+  <ng-container *swalPortal="swalTargets.confirmButton">
+    Fermer
+  </ng-container>
+
+</swal>

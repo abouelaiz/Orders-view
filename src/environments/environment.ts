@@ -6,14 +6,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyC4gv6FpgY55_0E8eJW-mclz8z8D4IIHuc",
-    authDomain: "delivery-d627f.firebaseapp.com",
-    databaseURL: "https://delivery-d627f.firebaseio.com",
-    projectId: "delivery-d627f",
-    storageBucket: "delivery-d627f.appspot.com",
-    messagingSenderId: "435138377469",
-    appId: "1:435138377469:web:49277f8ba90259d02db094",
-    measurementId: "G-F2ZF1P2Z6R"
+    apiKey: "AIzaSyAhVjNQCFOF8W0ufiVhTiV2QONHNgXfxdI",
+    authDomain: "orders-view.firebaseapp.com",
+    databaseURL: "https://orders-view-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "orders-view",
+    storageBucket: "orders-view.appspot.com",
+    messagingSenderId: "941381060038",
+    appId: "1:941381060038:web:84995a0f90050f5c851ec7"
   }
 };
 

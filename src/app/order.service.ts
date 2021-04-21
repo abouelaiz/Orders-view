@@ -9,11 +9,14 @@ import { Order } from 'src/app/order.model';
 })
 export class OrderService {
 
+  deliver: '';
+
   constructor(private firestore: AngularFirestore, private db: AngularFireDatabase) { }
 
   getData(key) {
     return this.db.list(key).valueChanges();
   }
+
 
   setData(key, val) {
     return this.db.object(key).set(val);

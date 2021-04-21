@@ -1,0 +1,78 @@
+<div class="orders-list">
+  <div  class="nav">
+    <div class="tab" [ngClass]="{ 'selected': filter === 'currents' }" (click)="filter = 'currents'">
+      Cmds en cours
+    </div>
+    <div class="tab" [ngClass]="{ 'selected': filter === 'history' }" (click)="filter = 'history'">
+      Historique
+    </div>
+  </div>
+  <div *ngIf="filter === 'currents'" class="container">
+    <input class="search" [(ngModel)]="search" #ctrl="ngModel" placeholder="nom,addresse..."/>
+    <span class="tag count">{{ orders.length }}</span>
+    <ng-material-icon icon="visibility" size="1" class="icon" *ngIf="displayD"></ng-material-icon>
+    <ng-material-icon icon="visibility_off" size="1" class="icon" *ngIf="!displayD"></ng-material-icon>
+  </div>
+  <div class="item" *ngFor="let order of orders" ngClass="{{order?.restaurant?.platform}}" [swal]="chooseDeliver" (click)="select(order)">
+    <div class="row" [ngClass]="{ 'selected': selectedOrder.displayId === order.displayId }">
+      <div class="text">
+        <span class="tag">{{order.index}}</span>{{order.name}} <br/>'----' #{{order.displayId}}
+        <br/><span class="status" ngClass="{{order.status}}">{{status[order.status]}}</span><br/>
+        {{order?.address?.address}}
+      </div>
+      <div>
+        {{order.deliver || '-'}} <br/> -  <br/><br/>
+        {{(order.total - order.discount)/100}} €<br/> {{order.orderedAt | date: 'HH:mm'}}
+      </div>
+    </div>
+  </div>
+
+  <swal #chooseDeliver title="">
+    <!-- This targets the confirm button's inner content
+         Notice the usage of ng-container to avoid creating an useless DOM element inside the button -->
+    <ng-container *swalPortal>
+      <ng-container *ngIf="!editOrder">
+        <h3>Choix livreur !</h3>
+        <div  class="lists">
+          <button class="item" *ngFor="let coursier of coursiers" [ngClass]="{ 'selected': selectedOrder.deliver === coursier.name }">
+            {{coursier.name}}
+          </button>
+          <button class="item">
+            aLaho a3lame
+          </button>
+        </div>
+        <h3>Status Commande</h3>
+        <div  class="lists actions">
+          <button class="item error" (click)="updateStatus('C')">
+            Annulé
+          </button>
+          <button class="item warning" (click)="editOrder = true">
+            Modifier
+          </button>
+          <button class="item" (click)="updateStatus('R')" *ngIf="selectedOrder.status == 'D' || selectedOrder.status == 'C'">
+            en cours
+          </button>
+          <button class="item valid" (click)="updateStatus('D')">
+            Livré
+          </button>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="editOrder">
+        <h3>Modifier information !</h3>
+        <form #f="ngForm" (ngSubmit)="updateOrder(f)" novalidate class="lists actions">
+          <input name="phone" ngModel placeholder="0768919960">
+          <input name="total" type="number" ngModel placeholder="29.5">
+          <input class="w70" name="address" ngModel placeholder="9 rue truillot 94200 Ivry-sur-seine">
+          <div></div>
+          <button class="item valid w70">
+            Enregistrer
+          </button>
+        </form>
+      </ng-container>
+    </ng-container>
+    <ng-container *swalPortal="swalTargets.confirmButton">
+      Fermer
+    </ng-container>
+
+  </swal>
+</div>

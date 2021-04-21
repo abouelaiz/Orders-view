@@ -1,0 +1,100 @@
+<ion-content [fullscreen]="true">
+  <br/>
+  <ion-list>
+    <ion-list-header>
+      En cours
+      <ion-icon name="bicycle-outline"></ion-icon>
+    </ion-list-header>
+    <ion-item *ngFor="let order of currentOrders" [swal]="detailOrder" (click)="selectedOrder = order">
+      <ion-avatar slot="start" *ngIf="order.paymentMethod === 'cash'">
+        <img src="../../assets/money.jpg">
+      </ion-avatar>
+      <ion-label>
+        <div class="row">
+          <h2>{{'#' + order.displayId + '  ' + order.name}}</h2>
+          <div class="time">
+            <ion-icon name="time-outline"></ion-icon>
+            <span> {{order.orderedAt | date: 'HH:mm'}} </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="status" ngClass="{{order.status}}">
+            <img class="platform" src="{{'../../assets/'+ order.restaurant.platform +'.png'}}">
+            {{status[order.status]}}
+          </div>
+          <div class="time">
+            {{(order.total - order.discount)/100}} €
+          </div>
+        </div>
+        <p>{{order.address.address}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <br/><br/>
+  <ion-list>
+    <ion-list-header>
+      Historique
+      <ion-icon name="folder-open-outline"></ion-icon>
+    </ion-list-header>
+    <ion-item *ngFor="let order of historyOrders" [swal]="detailOrder" (click)="selectedOrder = order">
+      <ion-label>
+        <div class="row">
+          <h2>{{'#' + order.displayId + '  ' + order.name}}</h2>
+          <div class="time">
+            <ion-icon name="time-outline"></ion-icon>
+            <span> {{order.orderedAt | date: 'HH:mm'}} </span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="status" ngClass="{{order.status}}">
+            <img class="platform" src="{{'../../assets/'+ order.restaurant.platform +'.png'}}">
+            {{status[order.status]}}
+          </div>
+          <div class="time">
+            {{(order.total - order.discount)/100}} €
+          </div>
+        </div>
+        <p>{{order.address.address}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <swal #detailOrder title="">
+    <ng-container *swalPortal>
+      <h3>Actions !</h3>
+      <div  class="swal-lists">
+        <ion-button href="{{'tel:' + selectedOrder?.phone}}" color="tertiary">
+          <ion-icon name="call-outline"></ion-icon>
+          {{selectedOrder?.phoneCode}}
+        </ion-button>
+        <ion-button href="{{'http://maps.google.com/?q=' + selectedOrder?.address.address}}" color="tertiary">
+          <ion-icon name="navigate-outline"></ion-icon>
+        </ion-button>
+      </div>
+      <div>
+        {{selectedOrder?.instructions}}
+      </div>
+      <h3 *ngIf="currentOrders.length > 1">Ordres commande</h3>
+      <div class="swal-lists" *ngIf="currentOrders.length > 1">
+        <ion-button  *ngFor="let item of currentOrders; let i = index" (click)="setOrder(i)"
+                     color="{{selectedOrder?.order === (i+1) ? 'dark' : 'medium'}}">
+          {{i+1}}
+        </ion-button>
+      </div>
+        <h3>Status Commande</h3>
+        <div  class="swal-lists actions">
+          <ion-button color="danger" (click)="updateStatus('C')">
+            Annulé
+          </ion-button>
+          <ion-button color="success" (click)="updateStatus('D')">
+            Livré
+          </ion-button>
+          <ion-button color="warning" (click)="updateStatus('U')">
+            Indisponible
+          </ion-button>
+        </div>
+    </ng-container>
+    <ng-container *swalPortal="swalTargets.confirmButton">
+      Fermer
+    </ng-container>
+  </swal>
+</ion-content>

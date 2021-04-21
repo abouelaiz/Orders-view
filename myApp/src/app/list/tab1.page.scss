@@ -1,0 +1,87 @@
+ion-avatar {
+  border: 3px solid red;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  .status {
+    position: relative;
+    padding-left: 28px;
+  }
+  .time {
+    font-weight: bold;
+    ion-icon {
+      position: relative;
+      top: 2px;
+    }
+  }
+}
+
+h2 {
+  font-weight: bold;
+}
+
+.status {
+  font-weight: bold;
+  &.P {
+    color: #ff9900;
+  }
+  &.U, &.C {
+    color: red;
+  }
+  &.R, &.D {
+    color: #336600;
+  }
+  &.I {
+    color: #000000;
+  }
+}
+
+h3 {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.platform {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  bottom: -5px;
+  left: -7px;
+}
+
+ion-list-header {
+  text-transform: uppercase;
+  ion-icon {
+    margin-left: 5px;
+  }
+}
+
+.swal-lists {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0px;
+  flex-wrap: wrap;
+  .item {
+    cursor: pointer;
+    padding: 10px;
+    color: black;
+    border-radius: 10px;
+    border: 2px solid black;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 5px;
+    text-transform: uppercase;
+    min-width: 45px;
+    &.selected {
+      background: black;
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+.swal2-content {
+  padding: 0px;
+}
